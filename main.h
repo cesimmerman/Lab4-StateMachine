@@ -1,3 +1,11 @@
+//*****************************************************************************
+// main.h
+// Author: Chad Simmerman
+// Date: 1/15/2020
+// Lab 4: FSM
+// Class: EE 4930
+// Description: Create a dehumidifier utilizing the concept of a FSM Lookup Table
+//****************************************************************************
 #include "msp.h"
 #include "msoe_lib_lcd.h"
 #include "msoe_lib_clk.h"
@@ -66,9 +74,9 @@ void updateDisplay(void);
  */
 StateElement stateTable [3][3] =
 {
-    {{s_defrost, defrostAction},{s_idle, idleAction},{s_on, onAction}},
-    {{s_defrost, defrostAction},{s_idle, idleAction},{s_on, onAction}},
-    {{s_defrost, defrostAction},{s_idle, idleAction},{s_on, onAction}},
+    {{s_defrost, defrostAction},{s_idle, idleAction},{s_on, onAction}}, // idle
+    {{s_defrost, defrostAction},{s_idle, idleAction},{s_on, onAction}}, // on
+    {{s_defrost, defrostAction},{s_idle, idleAction},{s_on, onAction}}, // defost
 };
 
 /**

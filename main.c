@@ -1,6 +1,11 @@
-/**
- * Header shit
- */
+//*****************************************************************************
+// main.c
+// Author: Chad Simmerman
+// Date: 1/15/2020
+// Lab 4: FSM
+// Class: EE 4930
+// Description: Create a dehumidifier utilizing the concept of a FSM Lookup Table
+//****************************************************************************
  #include "main.h"
 
 /**
@@ -34,7 +39,7 @@ void main(void)
 void checkUpdates(void)
 {
     int temp = setpoint - 5;
-    temp = (temp < 0) ? 0 : temp;
+    setpoint = (temp < 0) ? 0 : setpoint;
     l_hum = (humidity < temp) ? TRUE : FALSE;
     /**
      * If there is iced sensed, prioritize the ice input
@@ -44,7 +49,23 @@ void checkUpdates(void)
     if(iceMachineStatus)
     {
         event = e1;
-    } else if(l_hum == TRUE)
+    } else if((current == s_on) && (humidity > (setpoint-10)))
+    {
+        event = e3;
+    } else if ((current != s_on)&&(humidity >= setpoint))
+    {
+        event = e3;
+     } else
+    {
+        event = e2;
+    }
+    current = stateUpdate(current, event);
+
+/*
+    if(iceMachineStatus)
+    {
+        event = e1;
+    } else if((current == s_on) && (humidity <= setpoint - 10))
     {
         event = e2;
     } else
@@ -52,6 +73,7 @@ void checkUpdates(void)
         event = e3;
     }
     current = stateUpdate(current, event);
+    */
 }
 
 /**
